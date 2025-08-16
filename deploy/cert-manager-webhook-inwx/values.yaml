@@ -1,0 +1,37 @@
+groupName: cert-manager-webhook-inwx.flying-lama.github.com
+
+credentialsSecretRefs:
+  - inwx-credentials
+
+deployment:
+  loglevel: 2
+
+certManager:
+  namespace: cert-manager
+  serviceAccountName: cert-manager
+
+image:
+  repository: ghcr.io/flying-lama/cert-manager-webhook-inwx
+  tag: latest
+  pullPolicy: Always
+
+nameOverride: ""
+fullnameOverride: ""
+
+service:
+  type: ClusterIP
+  port: 443
+
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}
