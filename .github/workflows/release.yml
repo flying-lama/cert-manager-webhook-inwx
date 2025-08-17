@@ -141,7 +141,6 @@ jobs:
           fi
           
           DOCKER_INFO="### Docker Images\n\n"
-          DOCKER_INFO+="- \`ghcr.io/${{ github.repository }}:latest\`\n"
           DOCKER_INFO+="- \`ghcr.io/${{ github.repository }}:${{ needs.release-helm.outputs.chart-version }}\`\n"
           DOCKER_INFO+="- \`ghcr.io/${{ github.repository }}:v${{ needs.release-helm.outputs.chart-version }}\`\n\n"
           
@@ -153,7 +152,7 @@ jobs:
           HELM_INFO+="\`\`\`\n\n"
           HELM_INFO+="Install the chart:\n"
           HELM_INFO+="\`\`\`bash\n"
-          HELM_INFO+="helm install my-release ${{ github.repository_owner }}-${{ github.event.repository.name }}/${{ github.event.repository.name }} --version ${{ needs.release-helm.outputs.chart-version }}\n"
+          HELM_INFO+="helm install my-cert-manager-webhook-inwx ${{ github.repository_owner }}-${{ github.event.repository.name }}/${{ github.event.repository.name }} --version ${{ needs.release-helm.outputs.chart-version }}\n"
           HELM_INFO+="\`\`\`\n"
           
           # Combine all sections
