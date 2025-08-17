@@ -45,21 +45,18 @@ spec:
     solvers:
       - dns01:
           webhook:
-            groupName: de.inwx.webhook
+            groupName: acme.flying-lama.com
             solverName: inwx
             config:
-              username:
-                secretKeyRef:
-                  name: inwx-credentials
-                  key: username
-              password:
-                secretKeyRef:
-                  name: inwx-credentials
-                  key: password
-              otpKey:
-                otpKeySecretKeyRef:
-                  name: inwx-credentials
-                  key: otpKey
+              usernameSecretKeyRef:
+                name: inwx-credentials
+                key: username
+              passwordSecretKeyRef:
+                name: inwx-credentials
+                key: password
+              otpKeySecretKeyRef:
+                name: inwx-credentials
+                key: otpKey
 ```
 For more details, please refer to https://cert-manager.io/docs/configuration/acme/dns01/#configuring-dns01-challenge-provider
 
