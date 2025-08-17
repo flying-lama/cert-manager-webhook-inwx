@@ -87,7 +87,7 @@ jobs:
           git fetch --tags
           LAST_TAG=$(git tag --list 'cert-manager-webhook-inwx*' --sort=-v:refname | sed -n '2p')
           CURRENT_TAG=$(git tag --list 'cert-manager-webhook-inwx*' --sort=-v:refname | sed -n '1p')
-          COMMITS=$(git log ${LAST_TAG}..${CURRENT_TAG} --oneline | sed 's/^/- /')
+          COMMITS=$(git log --oneline ${LAST_TAG}..${CURRENT_TAG} | sed 's/^/- /')
           
           # Workaround to get newlines working
           echo -e "### Changes since \`${LAST_TAG}\`\n\n${COMMITS}" > msg
