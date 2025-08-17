@@ -67,7 +67,7 @@ Now, the actual webhook can be installed via Helm chart:
 ```
 helm repo add flying-lama-cert-manager-webhook-inwx https://flying-lama.github.io/cert-manager-webhook-inwx
 
-helm install my-cert-manager-webhook-inwx flying-lama-cert-manager-webhook-inwx/cert-manager-webhook-inwx --namespace cert-manager
+helm install cert-manager-webhook-inwx flying-lama-cert-manager-webhook-inwx/cert-manager-webhook-inwx --namespace cert-manager
 ```
 From that point, the issuer configured above should be able to solve
 the DNS01 challenges using ``cert-manager-webhook-inwx``.

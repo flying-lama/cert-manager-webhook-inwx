@@ -152,7 +152,7 @@ jobs:
           HELM_INFO+="\`\`\`\n\n"
           HELM_INFO+="Install the chart:\n"
           HELM_INFO+="\`\`\`bash\n"
-          HELM_INFO+="helm install my-cert-manager-webhook-inwx ${{ github.repository_owner }}-${{ github.event.repository.name }}/${{ github.event.repository.name }} --version ${{ needs.release-helm.outputs.chart-version }}\n"
+          HELM_INFO+="helm install cert-manager-webhook-inwx ${{ github.repository_owner }}-${{ github.event.repository.name }}/${{ github.event.repository.name }} --version ${{ needs.release-helm.outputs.chart-version }}\n"
           HELM_INFO+="\`\`\`\n"
           
           # Combine all sections
