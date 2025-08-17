@@ -89,8 +89,7 @@ jobs:
           ./cr upload \
               --owner "$owner" \
               --git-repo "$repo" \
-              --token "${{ secrets.GITHUB_TOKEN }}" \
-              --release-name-template "{{ .Version }}"
+              --token "${{ secrets.GITHUB_TOKEN }}"
           # update index and push to github pages
           git config user.email "$owner@users.noreply.github.com"
           git config user.name "$owner"
@@ -98,9 +97,7 @@ jobs:
               --owner "$owner" \
               --git-repo "$repo" \
               --token "${{ secrets.GITHUB_TOKEN }}" \
-              --release-name-template "{{ .Version }}" \
               --index-path ./index.yaml \
-              --charts-repo https://$owner.github.io/$repo \
               --push
 
       - name: Add commit digest to GH release
