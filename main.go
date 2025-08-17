@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"os"
 	"strings"
@@ -180,16 +181,19 @@ func loadConfig(cfgJSON *extapi.JSON) (inwxDNSProviderConfig, error) {
 func (c *inwxDNSProviderSolver) getInwxClient(cfg *inwxDNSProviderConfig, ns string) (p *inwx.Provider, err error) {
 	username, err := c.getSecretFromRef(cfg.UsernameSecretRef, ns)
 	if err != nil {
+		err = errors.New("username secret not found: " + err.Error())
 		return
 	}
 
 	password, err := c.getSecretFromRef(cfg.PasswordSecretRef, ns)
 	if err != nil {
+		err = errors.New("password secret not found: " + err.Error())
 		return
 	}
 
 	otpKey, err := c.getSecretFromRef(cfg.OtpKeySecretRef, ns)
 	if err != nil {
+		err = errors.New("otpKey secret not found: " + err.Error())
 		return
 	}
 
