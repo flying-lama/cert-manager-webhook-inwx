@@ -1,4 +1,4 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/flying-lama/cert-manager-webhook-inwx)](https://goreportcard.com/report/github.com/aellwein/cert-manager-webhook-inwx)
+[![Go Report Card](https://goreportcard.com/badge/github.com/flying-lama/cert-manager-webhook-inwx)](https://goreportcard.com/report/github.com/flying-lama/cert-manager-webhook-inwx)
 [![License](https://img.shields.io/github/license/flying-lama/cert-manager-webhook-inwx)](https://github.com/flying-lama/cert-manager-webhook-inwx/blob/main/LICENSE)
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/flying-lama/cert-manager-webhook-inwx)
 
