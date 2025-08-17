@@ -65,7 +65,7 @@ For more details, please refer to https://cert-manager.io/docs/configuration/acm
 
 Now, the actual webhook can be installed via Helm chart:
 ```
-helm repo add flying-lama-cert-manager-webhook-inwx https://flying-lama.github.io/cert-manager-webhook-inwx/charts/
+helm repo add flying-lama-cert-manager-webhook-inwx https://flying-lama.github.io/cert-manager-webhook-inwx
 
 helm install my-cert-manager-webhook-inwx flying-lama-cert-manager-webhook-inwx/cert-manager-webhook-inwx --namespace cert-manager
 ```
