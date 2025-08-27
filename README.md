@@ -28,8 +28,36 @@ kubectl create secret generic inwx-credentials \
     --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-After creating the secret, configure the ``Issuer``/``ClusterIssuer`` of
-yours to have the following configuration:
+After creating the secret, you need to configure RBAC permissions for the webhook to read the secret:
+
+```yaml
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: cert-manager
+  name: inwx-webhook-secret-reader
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  resourceNames: ["inwx-credentials"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: inwx-webhook-secret-binding
+  namespace: cert-manager
+subjects:
+- kind: ServiceAccount
+  name: cert-manager-webhook-inwx
+  namespace: cert-manager
+roleRef:
+  kind: Role
+  name: inwx-webhook-secret-reader
+  apiGroup: rbac.authorization.k8s.io
+```
+
+Then configure the ``Issuer``/``ClusterIssuer`` to have the following configuration:
 ```yml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer # or "Issuer"
@@ -45,7 +73,7 @@ spec:
     solvers:
       - dns01:
           webhook:
-            groupName: acme.flying-lama.com
+            groupName: cert-manager-webhook-inwx.flying-lama.github.com
             solverName: inwx
             config:
               usernameSecretKeyRef:
