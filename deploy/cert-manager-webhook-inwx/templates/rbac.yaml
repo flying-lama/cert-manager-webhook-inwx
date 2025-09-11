@@ -89,3 +89,39 @@ subjects:
     kind: ServiceAccount
     name: {{ .Values.certManager.serviceAccountName }}
     namespace: {{ .Values.certManager.namespace }}
+---
+# Grant the webhook permission to read secrets for INWX credentials
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: {{ include "cert-manager-webhook-inwx.fullname" . }}:secret-reader
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "cert-manager-webhook-inwx.name" . }}
+    chart: {{ include "cert-manager-webhook-inwx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+rules:
+- apiGroups: [""]
+  resources: ["secrets"]
+  resourceNames: ["inwx-credentials"]
+  verbs: ["get"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: {{ include "cert-manager-webhook-inwx.fullname" . }}:secret-reader
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ include "cert-manager-webhook-inwx.name" . }}
+    chart: {{ include "cert-manager-webhook-inwx.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
+subjects:
+- kind: ServiceAccount
+  name: {{ include "cert-manager-webhook-inwx.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: Role
+  name: {{ include "cert-manager-webhook-inwx.fullname" . }}:secret-reader
+  apiGroup: rbac.authorization.k8s.io
