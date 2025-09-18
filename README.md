@@ -28,8 +28,7 @@ kubectl create secret generic inwx-credentials \
     --dry-run=client -o yaml | kubectl apply -f -
 ```
 
-After creating the secret, configure the ``Issuer``/``ClusterIssuer`` of
-yours to have the following configuration:
+Ater creating the secret, configure a ``ClusterIssuer`` or ``Issuer`` to have the following configuration:
 ```yml
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer # or "Issuer"
@@ -38,14 +37,14 @@ metadata:
 spec:
   acme:
     server: https://acme-v02.api.letsencrypt.org/directory
-    email: test@example.com
+    email: test@example.com #change this
     profile: tlsserver
     privateKeySecretRef:
       name: letsencrypt-prod
     solvers:
       - dns01:
           webhook:
-            groupName: acme.flying-lama.com
+            groupName: cert-manager-webhook-inwx.flying-lama.github.com
             solverName: inwx
             config:
               usernameSecretKeyRef:
